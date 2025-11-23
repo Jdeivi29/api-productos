@@ -13,4 +13,8 @@ public class ProductosService {
     public Producto crear(Producto producto) {
         return productoRepository.save(producto);
     }
+public java.util.List<Producto> listar() {
+        return productoRepository.findAll();
+    }
+
 }
