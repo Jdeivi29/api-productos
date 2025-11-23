@@ -5,6 +5,8 @@ import com.products.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProductosService {
     @Autowired
@@ -15,6 +17,17 @@ public class ProductosService {
     }
 public java.util.List<Producto> listar() {
         return productoRepository.findAll();
+    }
+
+    public Producto actualizarStock(Long id, Integer nuevoStock){
+        Optional<Producto> producto = productoRepository.findById(id);
+        if (producto.isPresent()) {
+            Producto actualizar = producto.get();
+            actualizar.setStock(nuevoStock);
+            return productoRepository.save(actualizar);
+        }
+        return null;
+
     }
 
 }
