@@ -30,7 +30,15 @@ public class ProductoController {
     public ResponseEntity<Producto>actualizarStock(@PathVariable Long id, @RequestBody Integer nuevoStock){
         return new ResponseEntity<>(productoService.actualizarStock(id, nuevoStock),HttpStatus.OK);
     }
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        if (productoService.eliminar(id)) {
+            // Retorna 204 NO CONTENT si se eliminó correctamente
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        // Retorna 404 NOT FOUND si el ID no existía
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
 
 

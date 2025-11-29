@@ -30,4 +30,11 @@ public java.util.List<Producto> listar() {
 
     }
 
+    public boolean eliminar(Long id) {
+        if (productoRepository.existsById(id)) {
+            productoRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
